@@ -115,4 +115,28 @@ public class Strings {
 		
 		return tempString.toString();
 	}
+
+    //Aufgabe 5
+	public static void palindrom(final String text) {
+		String[] words = text.strip().split(" ");
+		for(int it = 0; it < words.length; ++it) {
+			if(isPalindrom(words[it])) {
+				System.out.println(words[it]);
+			}
+		}
+	}
+	
+	public static boolean isPalindrom(final String word) {
+		char[] tmpWord = word.toLowerCase().toCharArray();
+		int begin = 0;
+		int end = word.length() - 1;
+		
+		for(; begin < word.length() / 2; ++begin, --end) {
+			if(tmpWord[begin] != tmpWord[end]) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
 }
