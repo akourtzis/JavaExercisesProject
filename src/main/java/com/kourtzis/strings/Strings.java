@@ -64,4 +64,55 @@ public class Strings {
 		
 		}
 	}
+
+    // Aufgabe 4
+	public static boolean isAnagram(final String str1, final String str2) {
+		if(str1 == null || str2 == null) {
+			throw new NullPointerException("Parameter should not be null");
+		}
+		
+		if(str1.isBlank() && str2.isBlank()) {
+			return true;
+		}
+		
+		String str1New = removeAllNonLetters(str1);
+		String str2New = removeAllNonLetters(str2);
+			
+		if(str1New.length() != str2New.length()) {
+			return false;
+		}
+			
+		char[] str1Arr = str1New.toLowerCase().toCharArray();
+		StringBuilder tmpStr2 = new StringBuilder(str2New.toLowerCase());
+			
+		for(int it = 0; it < str1Arr.length; ++it) {
+			String ch = "" + str1Arr[it];
+			int index = tmpStr2.indexOf(ch);
+					
+			if(index != -1) {
+				tmpStr2.deleteCharAt(index);
+			}
+			else {
+				return false;
+			}
+		}
+			
+		return true;
+	}
+	
+	public static String removeAllNonLetters(final String str) {
+		if(str == null) {
+			throw new NullPointerException("Parameter should not be null");
+		}
+		StringBuilder tempString = new StringBuilder(str.length());
+		char[] strArr = str.strip().toCharArray();
+		
+		for(int it = 0; it < strArr.length; ++it) {
+			if(Character.isLetter(strArr[it])) {
+				tempString.append(strArr[it]);
+			}
+		}
+		
+		return tempString.toString();
+	}
 }
