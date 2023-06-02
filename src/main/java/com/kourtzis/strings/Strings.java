@@ -151,7 +151,7 @@ public class Strings {
 		StringBuilder tempText = new StringBuilder(text.length());
 		char[] chArr = text.strip().toCharArray();
 
-		for(int it = 0; it < 0; ++it) {
+		for(int it = 0; it < chArr.length; ++it) {
 			if(Character.isWhitespace(chArr[it])) {
 				continue;
 			}
