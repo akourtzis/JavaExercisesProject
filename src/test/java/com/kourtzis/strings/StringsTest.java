@@ -35,6 +35,29 @@ class StringsTest {
 		assertEquals(expectedString, result);
 	}
 
+	@Test
+	public void phraseIsPalindromeTest() {
+		String phrase = "Dogma I am God";
+		String word = "racecar";
+
+		boolean truePalindromePhrase = Strings.isPalindrom(phrase);
+		boolean truePalindromeWord = Strings.isPalindrom(word);
+
+		assertEquals(true, truePalindromePhrase);
+		assertEquals(true, truePalindromeWord);
+	}
+
+	@Test void phraseIsNotPalindromeTest() {
+		String phrase = "Dogma I am";
+		String word = "race"; 
+
+		boolean falsePalindromePhrase = Strings.isPalindrom(phrase);
+		boolean falsePalindromeWord = Strings.isPalindrom(word);
+
+		assertEquals(false, falsePalindromePhrase);
+		assertEquals(false, falsePalindromeWord);
+	}
+
     @ParameterizedTest
 	@CsvSource(
 			{
