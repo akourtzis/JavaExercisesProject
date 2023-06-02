@@ -17,6 +17,24 @@ class StringsTest {
 		assertEquals("tset", revStr);
 	}
 
+	@Test
+	public void monthFebTest() {
+		String date = "05.02.2023";
+		String month = Strings.monthAsString(date);
+
+		assertEquals("Februar", month);
+	}
+
+	@Test
+	public void invalidDateTest() {
+		String expectedString = "Datum soll im Format \"dd.mm.yyyy\" angegeben werden.";
+		String invalidDate = "22/35/2303.";
+
+		String result = Strings.monthAsString(invalidDate);
+
+		assertEquals(expectedString, result);
+	}
+
     @ParameterizedTest
 	@CsvSource(
 			{

@@ -2,7 +2,9 @@ package com.kourtzis.strings;
 
 public class Strings {
     public static void main(String[] args) {
+		String invalidDate = "22/35/2303.";
 
+		String result = Strings.getMonth(invalidDate);
     }
     
     // Aufgabe 2
@@ -126,17 +128,38 @@ public class Strings {
 		}
 	}
 	
-	public static boolean isPalindrom(final String word) {
-		char[] tmpWord = word.toLowerCase().toCharArray();
+	public static boolean isPalindrom(final String phrase) {
+		String phraseWithoutWhiteSpaces = removeWhitespaceFromPhrase(phrase);
+		char[] tmpWord = phraseWithoutWhiteSpaces.toLowerCase().toCharArray();
 		int begin = 0;
-		int end = word.length() - 1;
+		int end = phraseWithoutWhiteSpaces.length() - 1;
 		
-		for(; begin < word.length() / 2; ++begin, --end) {
+		for(; begin < phraseWithoutWhiteSpaces.length() / 2; ++begin, --end) {
 			if(tmpWord[begin] != tmpWord[end]) {
 				return false;
 			}
 		}
 		
 		return true;
+	}
+
+	public static String removeWhitespaceFromPhrase(final String text) {
+		if(text == null) {
+			throw new NullPointerException("String object is not supposed to be null");
+		}
+
+		StringBuilder tempText = new StringBuilder(text.length());
+		char[] chArr = text.strip().toCharArray();
+
+		for(int it = 0; it < 0; ++it) {
+			if(Character.isWhitespace(chArr[it])) {
+				continue;
+			}
+			else {
+				tempText.append(chArr[it]);
+			}
+		}
+
+		return tempText.toString();
 	}
 }
