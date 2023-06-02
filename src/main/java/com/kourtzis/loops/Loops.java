@@ -47,4 +47,31 @@ public class Loops {
 
         return true;
     }
+
+    //Aufgabe 4
+    public static int ggt(int n, int m) {
+        if(n == 0) {
+            return Math.abs(m);
+        }
+        if(m == 0) {
+            return Math.abs(n);
+        }
+
+        n = Math.abs(n);
+        m = Math.abs(m);
+
+        if(m < n) {
+            int tmp = m;
+            m = n;
+            n = tmp;
+        }
+
+        while(n != 0) {
+            int tmp = m % n;
+            m = n;
+            n = tmp;
+        }
+
+        return m;
+    }
 }
