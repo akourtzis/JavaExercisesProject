@@ -11,7 +11,7 @@ public class ForLoops {
             return n;
         }
         int sum = 0;
-        for(int it = 0; it < n; ++it) {
+        for(int it = 0; it <= n; ++it) {
             sum += it;
         }
 
