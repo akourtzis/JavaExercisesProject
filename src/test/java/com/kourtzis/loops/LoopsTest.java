@@ -39,4 +39,10 @@ public class LoopsTest {
     public void ggtTest(int n, int m, int expectedResult) {
         assertEquals(expectedResult, Loops.ggt(n, m));
     }
+
+    @ParameterizedTest
+    @CsvSource()
+    public void forLooSumTest(int n, int expectedResult) {
+        assertEquals(expectedResult, Loops.sum(n));
+    }
 }
