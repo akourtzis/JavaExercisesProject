@@ -5,6 +5,7 @@ public class ForLoops {
 
     }
 
+    // Aufgabe 2
     public static int Sum(int n) {
         if(n < 0) {
             return n;
@@ -17,7 +18,8 @@ public class ForLoops {
         return sum;
     }
 
-    public int factorial(int n) {
+    // Aufgabe 3
+    public static int factorial(int n) {
         if(n < 0) {
             throw new IllegalArgumentException("Number must be a positive number");
         }
@@ -29,6 +31,24 @@ public class ForLoops {
         int res = 1;
         for(int it = 1; it < n; ++it) {
             res *= it;
+        }
+
+        return res;
+    }
+
+    // Aufgabe 4
+    public static int fibonacci(int n) {
+        if(n < 0) {
+            throw new IllegalArgumentException("Number must be a positive number");
+        }
+
+        if(n < 2) {
+            return 1;
+        }
+
+        int res = 0;
+        for(int it = 0; it < n; ++it) {
+            res += it;
         }
 
         return res;
