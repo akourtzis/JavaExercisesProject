@@ -29,7 +29,7 @@ public class ForLoops {
         }
 
         int res = 1;
-        for(int it = 1; it < n; ++it) {
+        for(int it = 1; it <= n; ++it) {
             res *= it;
         }
 
@@ -47,7 +47,7 @@ public class ForLoops {
         }
 
         int res = 0;
-        for(int it = 0; it < n; ++it) {
+        for(int it = 0; it <= n; ++it) {
             res += it;
         }
 
