@@ -47,7 +47,7 @@ public class LoopsTest {
         "5,15",
         "6,21"
     })
-    public void forLooSumTest(int n, int expectedResult) {
+    public void forLoopSumTest(int n, int expectedResult) {
         assertEquals(expectedResult, ForLoops.sum(n));
     }
 }
