@@ -6,7 +6,7 @@ public class ForLoops {
     }
 
     // Aufgabe 2
-    public static int Sum(int n) {
+    public static int sum(int n) {
         if(n < 0) {
             return n;
         }
