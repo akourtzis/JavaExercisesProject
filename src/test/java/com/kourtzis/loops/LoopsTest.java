@@ -50,4 +50,14 @@ public class LoopsTest {
     public void forLoopSumTest(int n, int expectedResult) {
         assertEquals(expectedResult, ForLoops.sum(n));
     }
+
+    @ParameterizedTest
+    @CsvSource({
+        "3,6",
+        "4,24",
+        "5,120"
+    })
+    public void forLoopFactorialTest(int n, int expectedResult) {
+        assertEquals(expectedResult, ForLoops.factorial(n));
+    }
 }
