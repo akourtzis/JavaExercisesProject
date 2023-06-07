@@ -42,13 +42,23 @@ public class ForLoops {
             throw new IllegalArgumentException("Number must be a positive number");
         }
 
-        if(n < 2) {
+        if(n == 0) { 
+            return 0;
+        }
+
+        if(n <= 2) {
             return 1;
         }
 
         int res = 0;
-        for(int it = 0; it <= n; ++it) {
-            res += it;
+        int firstNumber = 0;
+        int secondNumber = 1;
+
+        for(int it = 2; it <= n; ++it) {
+            res = firstNumber + secondNumber;
+
+            firstNumber = secondNumber;
+            secondNumber = res;
         }
 
         return res;
