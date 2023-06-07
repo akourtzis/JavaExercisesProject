@@ -41,8 +41,13 @@ public class LoopsTest {
     }
 
     @ParameterizedTest
-    @CsvSource()
+    @CsvSource({
+        "3,6",
+        "4,10",
+        "5,15",
+        "6,21"
+    })
     public void forLooSumTest(int n, int expectedResult) {
-        assertEquals(expectedResult, Loops.sum(n));
+        assertEquals(expectedResult, ForLoops.sum(n));
     }
 }
