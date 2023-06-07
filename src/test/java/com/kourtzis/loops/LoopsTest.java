@@ -75,7 +75,9 @@ public class LoopsTest {
         "9,34",
         "10,55",
         "11,89",
-        "12,144"
+        "12,144",
+        "13,233",
+        "14,377"
 
     })
     public void forLoopFibTest(int n, int expectedResult) {
