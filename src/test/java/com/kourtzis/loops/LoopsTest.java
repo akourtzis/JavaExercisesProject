@@ -60,4 +60,25 @@ public class LoopsTest {
     public void forLoopFactorialTest(int n, int expectedResult) {
         assertEquals(expectedResult, ForLoops.factorial(n));
     }
+
+    @ParameterizedTest
+    @CsvSource({
+        "0,0",
+        "1,1",
+        "2,1",
+        "3,2",
+        "4,3",
+        "5,5",
+        "6,8",
+        "7,13",
+        "8,21",
+        "9,34",
+        "10,55",
+        "11,89",
+        "12,144"
+
+    })
+    public void forLoopFibTest(int n, int expectedResult) {
+        assertEquals(expectedResult, ForLoops.fibonacci(n));
+    }
 }
