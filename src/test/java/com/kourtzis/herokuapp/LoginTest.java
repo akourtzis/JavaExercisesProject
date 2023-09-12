@@ -31,4 +31,23 @@ public class LoginTest {
             webDriver.quit();
         }
     }
+
+    // Action
+    @Test
+    public void validUserCanLogInTest() {
+        // Arrange
+        String username = "tomsmith";
+        String password = "SuperSecretPassword!";
+
+        // Act
+        webDriver.get("https://the-internet.herokuapp.com/login");
+        webDriver.findElement(By.id("username")).sendKeys(username);
+        webDriver.findElement(By.id("password")).sendKeys(password);
+        webDriver.findElement(By.className("radius")).click();
+
+        String expectedResult = "Welcome to the Secure Area. When you are done click logout below.";
+        String actualResult = webDriver.findElement(By.className("subheader")).getText();
+
+        Assertions.assertEquals(expectedResult, actualResult);
+    }
 }
