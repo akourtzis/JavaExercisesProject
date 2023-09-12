@@ -69,4 +69,23 @@ public class LoginTest {
 
         Assertions.assertEquals(expectedResult, actualResult);
     }
+
+    // Action
+    @Test
+    public void invalidPasswordLoginMessageTest() {
+        // Arrange
+        String username = "tomsmith";
+        String invalidPassword = "aa";
+
+        // Act
+        webDriver.get("https://the-internet.herokuapp.com/login");
+        webDriver.findElement(By.id("username")).sendKeys(username);
+        webDriver.findElement(By.id("password")).sendKeys(invalidPassword);
+        webDriver.findElement(By.className("radius")).click();
+
+        String expectedResult = "Your password is invalid!\n" + "×";
+        String actualResult = webDriver.findElement(By.className("error")).getText();
+
+        Assertions.assertEquals(expectedResult, actualResult);
+    }
 }
