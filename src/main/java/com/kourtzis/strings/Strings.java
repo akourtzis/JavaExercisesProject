@@ -2,9 +2,9 @@ package com.kourtzis.strings;
 
 public class Strings {
     public static void main(String[] args) {
-		String invalidDate = "22/35/2303.";
+		// String invalidDate = "22/35/2303.";
 
-		String result = Strings.getMonth(invalidDate);
+		// String result = Strings.getMonth(invalidDate);
     }
     
     // Aufgabe 2
