@@ -60,7 +60,7 @@ public class SelectorsTest {
 
     @ParameterizedTest
     @MethodSource("cssSelectors")
-    public void inputFieldsCSSTest(Map<String, String> map) throws Exception {
+    public void inputFieldsCSSTest(final Map<String, String> map) throws Exception {
         final String url = "https://selectorshub.com/xpath-practice-page/";
         
         // Act
@@ -75,45 +75,45 @@ public class SelectorsTest {
             // Assert
             Assertions.assertEquals(entry.getValue(), actualResult);
         });
-        
     }
 
     @ParameterizedTest
-    @CsvSource(
-        // Arrange
-        {
-            "//*[@id='userId'],test@mail.com",
-            "//*[@title='Password'],secret_password_!!!",
-            "/html/body/div[1]/main/div/div[1]/section[2]/div/div[1]/div/div[1]/div/form/div/div[1]/div/div/div/input[1],MyGoogle",
-            "/html/body/div[1]/main/div/div[1]/section[2]/div/div[1]/div/div[1]/div/form/div/div[1]/div/div/div/input[2],0123456789",
-            "//input[@id='inp_val'],lilie"
-        }
-    )
-    public void inputFieldsXPathTest(final String xpath, final String dummyText) {
+    @MethodSource("xpathSelectors")
+    public void inputFieldsXPathTest(final Map<String, String> map) {
         final String url = "https://selectorshub.com/xpath-practice-page/";
 
         // Act
         webDriver.get(url);
         
-        WebElement inputField = webDriver.findElement(By.xpath(xpath));
-        inputField.click();
-        inputField.sendKeys(dummyText);
+        map.entrySet().forEach(entry -> {
+            WebElement inputField = webDriver.findElement(By.xpath(entry.getKey()));
+            inputField.click();
+            inputField.sendKeys(entry.getValue());
 
-        final String actualResult = inputField.getAttribute("value");
+            final String actualResult = inputField.getAttribute("value");
 
-        // Assert
-        Assertions.assertEquals(dummyText, actualResult);
+            // Assert
+            Assertions.assertEquals(entry.getValue(), actualResult);
+        });
     }
 
     // Arrange
     private static Stream<Arguments> cssSelectors() {
     return Stream.of(
       Arguments.of(Map.of("#userId", "test@mail.com", 
-                          "#pass", "secret_password_!!!",
-                          ".element-companyId input[name=company]", "MyGoogle",
-                          ".element-companyId input[name='mobile number']", "0123456789",
-                          "#inp_val", "lilie")) 
-    );
-}
+                "#pass", "secret_password_!!!",
+                ".element-companyId input[name=company]", "MyGoogle",
+                ".element-companyId input[name='mobile number']", "0123456789",
+                "#inp_val", "lilie")));
+    }
 
+    // Arrange 
+    private static Stream<Arguments> xpathSelectors() {
+    return Stream.of(
+      Arguments.of(Map.of("//*[@id='userId']", "test@mail.com",
+            "//*[@title='Password']", "secret_password_!!!",
+            "/html/body/div[1]/main/div/div[1]/section[2]/div/div[1]/div/div[1]/div/form/div/div[1]/div/div/div/input[1]", "MyGoogle",
+            "/html/body/div[1]/main/div/div[1]/section[2]/div/div[1]/div/div[1]/div/form/div/div[1]/div/div/div/input[2]","0123456789",
+            "//input[@id='inp_val']", "lilie"))); 
+    }
 }
