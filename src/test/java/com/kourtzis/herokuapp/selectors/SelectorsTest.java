@@ -65,7 +65,7 @@ public class SelectorsTest {
     )
     public void inputFieldsCSSTest(final String cssSelector, final String dummyText) {
         final String url = "https://selectorshub.com/xpath-practice-page/";
-
+        
         // Act
         webDriver.get(url);
         WebElement inputField = webDriver.findElement(By.cssSelector(cssSelector));
@@ -98,9 +98,10 @@ public class SelectorsTest {
 
         // Act
         webDriver.get(url);
+        
         WebElement inputField = webDriver.findElement(By.xpath(xpath));
         inputField.sendKeys(dummyText);
-
+        
         final String actualResult = inputField.getText();
 
         // Assert
