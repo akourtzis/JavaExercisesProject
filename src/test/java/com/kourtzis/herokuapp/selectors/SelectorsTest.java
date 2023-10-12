@@ -1,12 +1,18 @@
 package com.kourtzis.herokuapp.selectors;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+
+import java.util.Map;
+import java.util.stream.Stream;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -53,44 +59,34 @@ public class SelectorsTest {
     }
 
     @ParameterizedTest
-    @CsvSource(
-        // Arrange
-        {
-            "#userId,test@mail.com"
-            // "#pass,secret_password_!!!",
-            // ".element-companyId input[name=company],MyGoogle",
-            // ".element-companyId input[name='mobile number'],0123-456789",
-            // "#inp_val,lilie"
-        }
-    )
-    public void inputFieldsCSSTest(final String cssSelector, final String dummyText) {
+    @MethodSource("cssSelectors")
+    public void inputFieldsCSSTest(Map<String, String> map) throws Exception {
         final String url = "https://selectorshub.com/xpath-practice-page/";
         
         // Act
         webDriver.get(url);
-        WebElement inputField = webDriver.findElement(By.cssSelector(cssSelector));
-        inputField.sendKeys(dummyText);
-        
-        final String actualResult = inputField.getText();
+        map.entrySet().forEach(entry -> {
+            WebElement inputField = webDriver.findElement(By.cssSelector(entry.getKey()));
+            inputField.click();
+            inputField.sendKeys(entry.getValue());
 
-        // Assert
-        Assertions.assertEquals(dummyText, actualResult);
+            final String actualResult = inputField.getAttribute("value");
+
+            // Assert
+            Assertions.assertEquals(entry.getValue(), actualResult);
+        });
+        
     }
 
     @ParameterizedTest
     @CsvSource(
         // Arrange
         {
-            "//*[@id='userId'],test@mail.com"
-            // "//*[@title='Password'],secret_password_!!!",
-            // "/html/body/div[1]/main/div/div[1]/section[2]/div/div[1]/div/div[1]/div/form/div/div[1]/div/div/div/input[1],MyGoogle",
-            // "/html/body/div[1]/main/div/div[1]/section[2]/div/div[1]/div/div[1]/div/form/div/div[1]/div/div/div/input[2],0123-456789",
-            // "//input[@id='inp_val'],lilie",
-            // "//input[@class='nameFld'][1], Athanasios",
-            // "//input[@class='nameFld'][2], Kourtzis",
-            // "//*[@id='kils'],username",
-            // "//*[@id='training'],random text!",
-            // "//*[@id='pwd'],random password"
+            "//*[@id='userId'],test@mail.com",
+            "//*[@title='Password'],secret_password_!!!",
+            "/html/body/div[1]/main/div/div[1]/section[2]/div/div[1]/div/div[1]/div/form/div/div[1]/div/div/div/input[1],MyGoogle",
+            "/html/body/div[1]/main/div/div[1]/section[2]/div/div[1]/div/div[1]/div/form/div/div[1]/div/div/div/input[2],0123456789",
+            "//input[@id='inp_val'],lilie"
         }
     )
     public void inputFieldsXPathTest(final String xpath, final String dummyText) {
@@ -100,11 +96,24 @@ public class SelectorsTest {
         webDriver.get(url);
         
         WebElement inputField = webDriver.findElement(By.xpath(xpath));
+        inputField.click();
         inputField.sendKeys(dummyText);
-        
-        final String actualResult = inputField.getText();
+
+        final String actualResult = inputField.getAttribute("value");
 
         // Assert
         Assertions.assertEquals(dummyText, actualResult);
     }
+
+    // Arrange
+    private static Stream<Arguments> cssSelectors() {
+    return Stream.of(
+      Arguments.of(Map.of("#userId", "test@mail.com", 
+                          "#pass", "secret_password_!!!",
+                          ".element-companyId input[name=company]", "MyGoogle",
+                          ".element-companyId input[name='mobile number']", "0123456789",
+                          "#inp_val", "lilie")) 
+    );
+}
+
 }
