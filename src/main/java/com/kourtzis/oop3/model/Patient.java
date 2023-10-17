@@ -30,6 +30,15 @@ public class Patient {
         this.insuranceCardPresent = insuranceCardPresent;            
     }
 
+    public Patient(final Patient rhs) {
+        this(rhs.getId(), 
+             rhs.getName(), 
+             rhs.getAddress(), 
+             rhs.getBirthday(), 
+             rhs.getInsuranceName(), 
+             rhs.isInsuranceCardPresent()); 
+    }
+
     public Patient(final String id, final String name) {
         this(id, name, "", null, name, true);
     }
