@@ -6,7 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
-@EqualsAndHashCode(of = {"healthInsuranceNumber"})
+@EqualsAndHashCode(of = {"healthInsuranceName"})
 public class HealthInsurance {
     private Set<Patient> patients;
     private String healthInsuranceNumber;
